@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "587493987192",
+    "project_id": "daniel-65eee",
+    "storage_bucket": "daniel-65eee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587493987192:android:167a9504f11a6cf3b6ee8d",
+        "android_client_info": {
+          "package_name": "com.example.daniel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587493987192-cpk51kje2nkq776kd8lkhtfpn4vhjro3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAQupl2TDhUf8LCQP2j57GoIOE71ZVtQ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587493987192-cpk51kje2nkq776kd8lkhtfpn4vhjro3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
