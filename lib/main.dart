@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 // View
-import 'package:daniel/screen/dashboard/main_dashboard.dart';
+// import 'package:daniel/screen/dashboard/main_dashboard.dart';
+import 'package:daniel/screen/login/login_v.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -100,7 +101,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: MyLogin(),
     );
   }
 

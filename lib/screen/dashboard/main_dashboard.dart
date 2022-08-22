@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () => _scaffoldKey.currentState?.openEndDrawer(),
               icon: const CircleAvatar(
                 backgroundImage: NetworkImage(
-                  'https://png.pngtree.com/png-clipart/20211011/ourlarge/pngtree-a-man-line-art-from-the-side-with-simple-water-drop-png-image_3977463.png',
+                  'https://i.pinimg.com/564x/9e/8a/88/9e8a88e1ea1fa25810134f8d4d269a5d.jpg',
                 ),
                 backgroundColor: Colors.greenAccent,
                 radius: 120,
@@ -88,25 +88,6 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-      // PageView(
-      //     controller: _controller,
-      //     scrollDirection: Axis.vertical,
-      //     children: const [
-      //       Post1(),
-      //       Post2(),
-      //     ],
-      //   )
-      // ListView.builder(
-      //     itemCount: _posts?.length ?? 0,
-      //     itemBuilder: (context, index) {
-      //       return RecipeCard(
-      //         title: _posts![index].quote,
-      //         cookTime: _posts![index].author,
-      //         rating: '3.0',
-      //         thumbnailUrl: _posts![index].image,
-      //       );
-      //     },
-      //   )
     );
   }
 }

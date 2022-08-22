@@ -1,6 +1,8 @@
 import 'package:daniel/screen/dashboard/main_dashboard.dart';
+import 'package:daniel/screen/login/login_v.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -16,7 +18,7 @@ class NavBar extends StatelessWidget {
             accountEmail: Text('daniel@gmail.com'),
             currentAccountPicture: CircleAvatar(
               backgroundImage: NetworkImage(
-                'https://png.pngtree.com/png-clipart/20211011/ourlarge/pngtree-a-man-line-art-from-the-side-with-simple-water-drop-png-image_3977463.png',
+                'https://i.pinimg.com/564x/9e/8a/88/9e8a88e1ea1fa25810134f8d4d269a5d.jpg',
               ),
             ),
             decoration: BoxDecoration(
@@ -36,18 +38,19 @@ class NavBar extends StatelessWidget {
               Get.to(() => const HomePage());
             },
           ),
-          ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text('Liked'),
-            onTap: () {
-              // Get.to(() => const HomePage());
-              print('Liked');
-            },
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.favorite),
+          //   title: Text('Liked'),
+          //   onTap: () {
+          //     // Get.to(() => const HomePage());
+          //     print('Liked');
+          //   },
+          // ),
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Logout'),
             onTap: () {
+              logout;
               // Get.to(() => const HomePage());
               print('logout');
             },
@@ -55,5 +58,15 @@ class NavBar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void logout() async {
+    // logout from the server ...
+
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    localStorage.remove('user');
+    localStorage.remove('token');
+    print('logout');
+    Get.to(() => const MyLogin());
   }
 }
