@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 
-class RecipeCard extends StatefulWidget {
-  final String title;
-  final String rating;
-  final String cookTime;
-  final String thumbnailUrl;
-  RecipeCard({
-    required this.title,
-    required this.cookTime,
-    required this.rating,
-    required this.thumbnailUrl,
+class SinggahCard extends StatefulWidget {
+  final String post_id;
+  final String post_title;
+  final String post_body;
+  final String category;
+  final String cover_image;
+  final String likes;
+  final String auhor_with_date;
+  SinggahCard({
+    required this.post_id,
+    required this.post_title,
+    required this.post_body,
+    required this.category,
+    required this.cover_image,
+    required this.likes,
+    required this.auhor_with_date,
   });
 
   @override
-  State<RecipeCard> createState() => _RecipeCardState();
+  State<SinggahCard> createState() => _SinggahCardState();
 }
 
-class _RecipeCardState extends State<RecipeCard> {
+class _SinggahCardState extends State<SinggahCard> {
   Color _iconColor1 = Colors.white;
   var iconLiked1 = Icons.favorite_border;
   @override
@@ -26,7 +32,7 @@ class _RecipeCardState extends State<RecipeCard> {
         body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: NetworkImage(widget.thumbnailUrl), fit: BoxFit.cover)),
+                  image: NetworkImage(widget.cover_image), fit: BoxFit.cover)),
           child: Center(
             /** Card Widget **/
 
@@ -41,13 +47,13 @@ class _RecipeCardState extends State<RecipeCard> {
                 color: Color.fromRGBO(9, 9, 9, 0.8),
                 child: SizedBox(
                   width: 360,
-                  height: 360,
+                  height: 400,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
                         Text(
-                          widget.cookTime,
+                          widget.post_title,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16,
@@ -66,7 +72,7 @@ class _RecipeCardState extends State<RecipeCard> {
                           height: 10,
                         ), //SizedBox
                         Text(
-                          widget.title,
+                          widget.post_body,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 14,
@@ -102,7 +108,7 @@ class _RecipeCardState extends State<RecipeCard> {
                                       },
                                     ),
                                     Text(
-                                      '126',
+                                      widget.likes,
                                       style: TextStyle(
                                         fontSize: 12.0,
                                         fontWeight: FontWeight.w600,
@@ -122,14 +128,14 @@ class _RecipeCardState extends State<RecipeCard> {
                                       color: Colors.white,
                                       onPressed: () => print('Like post'),
                                     ),
-                                    Text(
-                                      '126',
-                                      style: TextStyle(
-                                        fontSize: 12.0,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    // Text(
+                                    //   '126',
+                                    //   style: TextStyle(
+                                    //     fontSize: 12.0,
+                                    //     fontWeight: FontWeight.w600,
+                                    //     color: Colors.white,
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               ),
@@ -138,7 +144,7 @@ class _RecipeCardState extends State<RecipeCard> {
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(right: 36),
+                                      padding: const EdgeInsets.only(right: 32),
                                       child: IconButton(
                                         icon: Icon(Icons.favorite_border),
                                         iconSize: 0.001,
@@ -147,7 +153,7 @@ class _RecipeCardState extends State<RecipeCard> {
                                       ),
                                     ),
                                     Text(
-                                      '22 Aug,2022.Ilias',
+                                      widget.auhor_with_date,
                                       style: TextStyle(
                                         fontSize: 12.0,
                                         fontWeight: FontWeight.w600,
@@ -160,14 +166,35 @@ class _RecipeCardState extends State<RecipeCard> {
                             ],
                           ),
                         ),
-                        // Padding(
+
+                        Row(
+                          children: [
+                            Flexible(
+                                flex: 15,
+                                child: Align(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Category: ${widget.category}',
+                                        style: TextStyle(
+                                          fontSize: 10.0,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ],
+                        ),
                       ],
-                    ), //Column
-                  ), //Padding
-                ), //SizedBox
+                    ),
+                  ),
+                ),
               ),
-            ), //Card
-          ), //Center,
+            ),
+          ),
         ));
   }
 }

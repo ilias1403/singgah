@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'dart:io' show Platform;
+import 'package:daniel/helper/general_config.dart' as globals;
 
 class MyLogin extends StatefulWidget {
   const MyLogin({Key? key}) : super(key: key);
@@ -130,17 +131,12 @@ class _MyLoginState extends State<MyLogin> {
       "os": os,
       'device_info': device
     };
-
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
     var res = await UserController().postDataUser(data);
     if (res['status'] == 'success') {
-      print(res);
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      localStorage.setString('token', res['user']['fcm_token']);
-      localStorage.setString('user', json.encode(res['user']));
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const HomePage()));
     } else {
-      // _showMsg(body['message']);
       showDialog(
           context: context,
           builder: (_) => AlertDialog(

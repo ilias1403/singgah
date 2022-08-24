@@ -1,5 +1,8 @@
+import 'package:daniel/controller/user.dart';
+import 'package:daniel/main.dart';
 import 'package:daniel/screen/dashboard/main_dashboard.dart';
 import 'package:daniel/screen/login/login_v.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,10 +35,10 @@ class NavBar extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.home),
+            leading: Icon(Icons.category),
             title: Text('Home'),
             onTap: () {
-              Get.to(() => const HomePage());
+              // Get.to(() => const MyApp());
             },
           ),
           // ListTile(
@@ -50,7 +53,7 @@ class NavBar extends StatelessWidget {
             leading: Icon(Icons.logout),
             title: Text('Logout'),
             onTap: () {
-              logout;
+              logout();
               // Get.to(() => const HomePage());
               print('logout');
             },
@@ -63,10 +66,15 @@ class NavBar extends StatelessWidget {
   void logout() async {
     // logout from the server ...
 
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    localStorage.remove('user');
-    localStorage.remove('token');
-    print('logout');
-    Get.to(() => const MyLogin());
+    final deviceInfoPlugin = DeviceInfoPlugin();
+    final deviceInfo = await deviceInfoPlugin.deviceInfo;
+    final map = deviceInfo.toMap();
+    var data = {
+      'device_unique_id': map['id'],
+    };
+    var res = await UserController().user_logout(data);
+    if (res['status'] == 'success') {
+      Get.to(() => const MyLogin());
+    }
   }
 }

@@ -10,7 +10,7 @@ class PostController {
 
   Future getQuoteList() async {
     var response = await client
-        .get(Uri.parse(globals.Api_base_url + '/super/fetch_data_quotes'));
+        .get(Uri.parse(globals.Api_base_url + '/post/fetch_data_posts'));
     if (response.statusCode == 200) {
       var jsons = response.body;
       return postFromJson(jsons);

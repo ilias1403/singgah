@@ -1,13 +1,11 @@
 import 'package:daniel/controller/post.dart';
 import 'package:daniel/model/post_m.dart';
-import 'package:daniel/widget/recipe_card.dart';
+import 'package:daniel/widget/singgah_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:daniel/screen/navbar/main_navbar.dart';
-
-import 'package:daniel/screen/post/post1_v.dart';
-import 'package:daniel/screen/post/post2_v.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -29,9 +27,8 @@ class _HomePageState extends State<HomePage> {
     _getPosts();
   }
 
-  _getPosts() async {
+  Future<void> _getPosts() async {
     _posts = await PostController().getQuoteList();
-    // print("Log : $_posts");
     setState(() {
       _isLoading = false;
     });
@@ -39,6 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var default_bg = Colors.greenAccent;
     return Scaffold(
       key: _scaffoldKey,
       endDrawer: const NavBar(),
@@ -60,34 +58,44 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: _isLoading
-          ? Center(child: CircularProgressIndicator())
-          : Container(
-              decoration: BoxDecoration(
-                  // image: DecorationImage(image: AssetImage('Assets/night.jpg')),
-                  ),
-              child: Column(
-                children: [
-                  Container(
-                      // height: constraints.maxHeight * 0.175,
+      body: RefreshIndicator(
+        onRefresh: _getPosts,
+        child: _isLoading
+            ? Center(
+                child: SpinKitSquareCircle(
+                color: Colors.purple,
+                size: 50.0,
+              ))
+            : Container(
+                decoration: BoxDecoration(
+                    // image: DecorationImage(image: AssetImage('Assets/night.jpg')),
+                    color: default_bg),
+                child: Column(
+                  children: [
+                    Container(
+                        // height: constraints.maxHeight * 0.175,
+                        ),
+                    Expanded(
+                      child: PageView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: _posts?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return SinggahCard(
+                            post_id: _posts![index].postId,
+                            post_title: _posts![index].postTitle,
+                            post_body: _posts![index].postBody,
+                            category: _posts![index].category,
+                            cover_image: _posts![index].coverImage,
+                            likes: _posts![index].likes,
+                            auhor_with_date: _posts![index].authorWithDate,
+                          );
+                        },
                       ),
-                  Expanded(
-                    child: PageView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: _posts?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        return RecipeCard(
-                          title: _posts![index].quote,
-                          cookTime: _posts![index].author,
-                          rating: '3.0',
-                          thumbnailUrl: _posts![index].image,
-                        );
-                      },
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+      ),
     );
   }
 }
