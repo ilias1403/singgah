@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:daniel/controller/user.dart';
 import 'package:daniel/screen/dashboard/main_dashboard.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'dart:io' show Platform;
@@ -134,8 +135,7 @@ class _MyLoginState extends State<MyLogin> {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     var res = await UserController().postDataUser(data);
     if (res['status'] == 'success') {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const HomePage()));
+      Get.to(() => const HomePage());
     } else {
       showDialog(
           context: context,

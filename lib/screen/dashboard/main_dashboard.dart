@@ -1,11 +1,16 @@
+import 'package:daniel/controller/notify.dart';
 import 'package:daniel/controller/post.dart';
+import 'package:daniel/model/notify_m.dart';
 import 'package:daniel/model/post_m.dart';
 import 'package:daniel/widget/singgah_card.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:daniel/screen/navbar/main_navbar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:material_dialogs/material_dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,7 +22,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final _controller = PageController();
   List<Post>? _posts;
   bool _isLoading = true;
 
@@ -92,6 +96,23 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ),
+                    // StreamBuilder(
+                    //   stream: getPrice(),
+                    //   builder: (context, snapshot) {
+                    //     if (snapshot.hasData) {
+                    //       print(snapshot.data);
+                    //     } else if (snapshot.hasError) {
+                    //       return Text(
+                    //         '${snapshot.error}',
+                    //         style: TextStyle(
+                    //             fontSize: 20,
+                    //             fontWeight: FontWeight.bold,
+                    //             color: Colors.white),
+                    //       );
+                    //     }
+                    //     return Text('Test');
+                    //   },
+                    // )
                   ],
                 ),
               ),
@@ -100,4 +121,43 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class getPosting {}
+Widget btn3(BuildContext context) {
+  return MaterialButton(
+    minWidth: 300,
+    color: Colors.grey[300],
+    onPressed: () => Dialogs.materialDialog(
+      color: Colors.white,
+      msg: 'Congratulations, you won 500 points',
+      title: 'Congratulations',
+      lottieBuilder: Lottie.network(
+        'https://assets9.lottiefiles.com/packages/lf20_cn1bp1vk.json',
+        fit: BoxFit.contain,
+      ),
+      dialogWidth: kIsWeb ? 0.3 : null,
+      context: context,
+      actions: [
+        IconsButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          text: 'Okay!',
+          iconData: Icons.done,
+          color: Colors.green,
+          textStyle: TextStyle(color: Colors.white),
+          iconColor: Colors.white,
+        ),
+        // IconsButton(
+        //   onPressed: () {
+        //     Navigator.of(context).pop();
+        //   },
+        //   text: 'Claim',
+        //   iconData: Icons.done,
+        //   color: Colors.blue,
+        //   textStyle: TextStyle(color: Colors.white),
+        //   iconColor: Colors.white,
+        // ),
+      ],
+    ),
+    child: Text("Show animations Material Dialog"),
+  );
+}

@@ -1,4 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:material_dialogs/material_dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 
 class SinggahCard extends StatefulWidget {
   final String post_id;
@@ -126,7 +129,41 @@ class _SinggahCardState extends State<SinggahCard> {
                                       icon: Icon(Icons.chat_bubble_outline),
                                       iconSize: 20.0,
                                       color: Colors.white,
-                                      onPressed: () => print('Like post'),
+                                      onPressed: () => Dialogs.materialDialog(
+                                        color: Colors.white,
+                                        msg:
+                                            'Congratulations, you won 500 points',
+                                        title: 'Congratulations',
+                                        lottieBuilder: Lottie.network(
+                                          'https://assets9.lottiefiles.com/packages/lf20_cn1bp1vk.json',
+                                          fit: BoxFit.contain,
+                                        ),
+                                        dialogWidth: kIsWeb ? 0.3 : null,
+                                        context: context,
+                                        actions: [
+                                          IconsButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            text: 'Okay!',
+                                            iconData: Icons.done,
+                                            color: Colors.green,
+                                            textStyle:
+                                                TextStyle(color: Colors.white),
+                                            iconColor: Colors.white,
+                                          ),
+                                          // IconsButton(
+                                          //   onPressed: () {
+                                          //     Navigator.of(context).pop();
+                                          //   },
+                                          //   text: 'Claim',
+                                          //   iconData: Icons.done,
+                                          //   color: Colors.blue,
+                                          //   textStyle: TextStyle(color: Colors.white),
+                                          //   iconColor: Colors.white,
+                                          // ),
+                                        ],
+                                      ),
                                     ),
                                     // Text(
                                     //   '126',
